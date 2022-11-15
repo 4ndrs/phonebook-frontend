@@ -14,7 +14,12 @@ const App = () => {
   const [notification, setNotification] = useState({ text: "", error: false });
 
   useEffect(() => {
-    setTimeout(() => setNotification({ text: "", error: false }), 4000);
+    const id = setTimeout(
+      () => setNotification({ text: "", error: false }),
+      4000
+    );
+
+    return () => clearTimeout(id);
   }, [notification]);
 
   useEffect(() => {
