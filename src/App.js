@@ -76,9 +76,13 @@ const App = () => {
     const person = persons.find((p) => p.id === id);
 
     if (window.confirm(`Delete ${person.name}?`)) {
-      phonebook
-        .remove(id)
-        .then(() => setPersons(persons.filter((p) => p.id !== id)));
+      phonebook.remove(id).then(() => {
+        setPersons(persons.filter((p) => p.id !== id));
+        setNotification({
+          text: `${person.name} deleted`,
+          error: false,
+        });
+      });
     }
   };
 
