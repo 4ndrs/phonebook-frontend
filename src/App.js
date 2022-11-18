@@ -64,12 +64,20 @@ const App = () => {
 
     const newPersonObject = { name: newName, number: newNumber };
 
-    phonebook.add(newPersonObject).then((newPerson) => {
-      setPersons(persons.concat(newPerson));
-      setNotification({ text: `Added ${newPerson.name}`, error: false });
-      setNewName("");
-      setNewNumber("");
-    });
+    phonebook
+      .add(newPersonObject)
+      .then((newPerson) => {
+        setPersons(persons.concat(newPerson));
+        setNotification({ text: `Added ${newPerson.name}`, error: false });
+        setNewName("");
+        setNewNumber("");
+      })
+      .catch((error) => {
+        setNotification({
+          text: error.response.data.error,
+          error: true,
+        });
+      });
   };
 
   const handleDelete = (id) => {
